@@ -1,56 +1,119 @@
-import { Router } from "express";
+import express from "express";
+import fs from "fs";
 
-const router = Router();
+const router = express.Router();
+const productsFilePath = "./data/products.json";
 
-let products = [];
+const readProductsFromFile = () => {
+  try {
+    const data = fs.readFileSync(productsFilePath, "utf-8");
+    return JSON.parse(data);
+  } catch (err) {
+    console.error("Error reading products:", err);
+    return [];
+  }
+};
 
-router.get('/', (req, res) => {
+const writeProductsToFile = (products) => {
+  try {
+    fs.writeFileSync(productsFilePath, JSON.stringify(products, null, 2));
+  } catch (err) {
+    console.error("Error writing products:", err);
+  }
+};
+
+router.get("/", (req, res) => {
+  const products = readProductsFromFile();
+
+  if (products.length === 0) {
+    return res.status(200).json({ estado: "There are no products available yet" });
+  }
+
   res.send(products);
 });
 
-router.get('/:pid', (req, res) => {
-  const pid = +req.params.pid;
-  const product = products.find((product) => product.id === pid);
+router.get("/:id", (req, res) => {
+  const products = readProductsFromFile();
+  const id = +req.params.id;
+  const product = products.find((p) => p.id === id);
 
   if (product) {
     res.send(product);
   } else {
-    res.status(404).send({ message: "Product not found" });
+    res.status(404).json({ error: "Product not found" });
   }
 });
 
-router.post('/', (req, res) => {
-    const { title, description, code, price, status, stock, category } = req.body;
-    const newProduct = { id: products.length + 1, title, description, code,price,  status, stock, category };
+router.post("/add", (req, res) => {
+  const products = readProductsFromFile();
+  const { title, description, code, price, status, stock, category } = req.body;
 
-    products.push(newProduct);
-    res.send(newProduct);
-})
-
-router.put('/:pid', (req,res) => {
-  const productId = req.params.pid;
-  const updateProduct = req.body;
-  
-  const index = products.findIndex( product => product.id == productId);
-
-  if (index === -1) {
-      return res.status(404).send({status: 'error', message: 'Product not found'})
+  if ( !title || !description || !code || !price || typeof status === "undefined" || !stock || !category ) {
+    return res.status(400).json({ error: "All fields are required" });
   }
 
-  products[index] = updateProduct;
-  res.send({status: 'success', message: 'Edited product'})
-})
+  const newProduct = {
+    id: products.length + 1,
+    title,
+    description,
+    code,
+    price,
+    status,
+    stock,
+    category,
+  };
 
-router.delete('/:pid', (req, res) => {
-  const productId = req.params.pid;
-  const currentLength = products.length;
+  products.push(newProduct);
+  writeProductsToFile(products);
 
-  products = products.filter(product => productId != product.id);
+  res.status(200).json({ Operacion: "Made", ProductoAgregado: newProduct });
+});
 
-    if (currentLength === products.length) {
-        return res.status(404).send({status: 'error', message: 'Product not found'})
-    }
+router.put("/change/:id", (req, res) => {
+  const products = readProductsFromFile();
+  const id = +req.params.id;
+  const { title, description, code, price, status, stock, category } = req.body;
 
-    res.send({status: 'succes', message: 'Removed product'});  
-})
+  const productIndex = products.findIndex((product) => product.id === id);
+
+  if (productIndex === -1) {
+    return res.status(400).json({ error: "The product does not exist" });
+  }
+
+  if ( !title || !description || !code || typeof price === "undefined" || typeof status === "undefined" || typeof stock === "undefined" || !category ) {
+    return res.status(400).json({ error: "TAll fields are required" });
+  }
+
+  const updatedProduct = {
+    id,
+    title,
+    description,
+    code,
+    price,
+    status,
+    stock,
+    category,
+  };
+
+  products[productIndex] = updatedProduct;
+  writeProductsToFile(products);
+
+  res.status(200).json({ Operacion: "Made", ProductoActualizadoA: updatedProduct });
+});
+
+router.delete("/delete/:id", (req, res) => {
+  const products = readProductsFromFile();
+  const id = +req.params.id;
+  const productIndex = products.findIndex((product) => product.id === id);
+
+  if (productIndex === -1) {
+    return res.status(404).json({ error: "The product does not exist" });
+  }
+
+  const deletedProd = products.splice(productIndex, 1);
+  writeProductsToFile(products);
+
+  res.status(200).json({ Operacion: "Made", ProductoEliminado: deletedProd[0] });
+});
+
 export default router;
