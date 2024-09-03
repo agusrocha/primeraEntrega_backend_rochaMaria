@@ -1,122 +1,110 @@
 [
   {
-    "id": "1",
+    "id": 1,
     "title": "Pinza",
-    "description": "Pinza Reforzada Marca Dogo",
+    "category": "Pinza Reforzada Marca Dogo",
     "price": 500,
     "status": true,
-    "thumbnail": "imagen",
     "code": "pinza24",
     "stock": 100
   },
   {
-    "id": "2",
+    "id": 2,
     "title": "Martillo",
-    "description": "Martillo marca Mandarin",
+    "category": "Martillo marca Mandarin",
     "price": 700,
     "status": true,
-    "thumbnail": "imagen",
     "code": "mar24",
     "stock": 100
   },
   {
-    "id": "3",
+    "id": 3,
     "title": "Tenaza",
-    "description": "Tenaza Marca Dogo",
+    "category": "Tenaza Marca Dogo",
     "price": 600,
     "status": true,
-    "thumbnail": "imagen",
     "code": "tena24",
     "stock": 100
   },
   {
-    "id": "4",
+    "id": 4,
     "title": "Alicate",
-    "description": "Alicate mango azul",
+    "category": "Alicate mango azul",
     "price": 450,
     "status": true,
-    "thumbnail": "imagen",
     "code": "ali24",
     "stock": 100
   },
   {
-    "id": "5",
+    "id": 5,
     "title": "Caja de herramientas",
-    "description": "Caja de herramientas",
+    "category": "Caja de herramientas",
     "price": 1100,
     "status": true,
-    "thumbnail": "imagen",
     "code": "caja24",
     "stock": 100
   },
   {
-    "id": "6",
+    "id": 6,
     "title": "Nivel",
-    "description": "Nivel plastico Marca Dogo",
+    "category": "Nivel plastico Marca Dogo",
     "price": 575,
     "status": true,
-    "thumbnail": "imagen",
     "code": "nivel24",
     "stock": 100
   },
   {
-    "id": "7",
+    "id": 7,
     "title": "Destornillador",
-    "description": "Destornillador Marca Dogo",
+    "category": "Destornillador Marca Dogo",
     "price": 620,
     "status": true,
-    "thumbnail": "imagen",
     "code": "destor24",
     "stock": 100
   },
   {
-    "id": "8",
+    "id": 8,
     "title": "Metro",
-    "description": "Metro marca Hilux",
+    "category": "Metro marca Hilux",
     "price": 500,
     "status": true,
-    "thumbnail": "imagen",
     "code": "metro24",
     "stock": 100
   },
   {
-    "id": "9",
+    "id": 9,
     "title": "Pinza de Punta",
-    "description": "Pinza de Punta",
+    "category": "Pinza de Punta",
     "price": 500,
     "status": true,
-    "thumbnail": "imagen",
     "code": "pinpun24",
     "stock": 790
   },
   {
-    "id": "10",
+    "id": 10,
     "title": "Destornillador Philip",
-    "description": "Philip imantado marcad dogo",
+    "category": "Philip imantado marcad dogo",
     "price": 500,
     "status": true,
-    "thumbnail": "imagen",
     "code": "desphi24",
     "stock": 100
   },
   {
     "id": 11,
     "title": "Pala",
-    "description": "Pala cabo de madera",
+    "category": "Pala cabo de madera",
     "price": "1300",
     "status": "true",
-    "thumbnail": "",
     "code": "pala24",
     "stock": "50"
   },
   {
     "id": 12,
     "title": "Cortadora de Cesped",
-    "description": "Cortadora de Cesped",
+    "category": "Cortadora de Cesped",
     "price": "5000",
     "status": "true",
-    "thumbnail": "",
     "code": "corces",
-    "stock": ""
+    "stock": 6
   }
 ]
