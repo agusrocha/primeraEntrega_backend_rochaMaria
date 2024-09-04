@@ -2,8 +2,8 @@ import express from "express";
 import fs from "fs";
 
 const router = express.Router();
-const cartsFilePath = "./data/cart.json";
-const productsFilePath = "./data/products.json";
+const cartsFilePath = "src/data/cart.json";
+const productsFilePath = "src/data/products.json";
 
 const readCartsFromFile = () => {
   try {
