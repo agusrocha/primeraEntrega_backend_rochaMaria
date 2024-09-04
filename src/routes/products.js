@@ -2,7 +2,7 @@ import express from "express";
 import fs from "fs";
 
 const router = express.Router();
-const productsFilePath = "./data/products.json";
+const productsFilePath = "src/data/products.json";
 
 const readProductsFromFile = () => {
   try {
